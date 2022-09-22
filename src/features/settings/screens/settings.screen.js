@@ -7,6 +7,7 @@ import styled from "styled-components/native";
 import { Text } from "react-native";
 import { colors } from "../../../infrastructure/theme/colors";
 import { Spacer } from "../../../components/spacer/spacer.component";
+
 const AvatarContainer = styled.View`
   align-items: center;
   padding: ${(props) => props.theme.space[2]};
@@ -43,6 +44,15 @@ export const SettingsScreen = ({ navigation }) => {
           title="تسجيل خروج"
           left={(props) => <List.Icon {...props} color="black" icon="door" />}
           onPress={onLogout}
+        />
+        <List.Item
+          style={styles.itemStyle}
+          titleStyle={styles.settingList}
+          title="اضافة مطعم"
+          left={(props) => (
+            <List.Icon {...props} color="black" icon="hamburger-plus" />
+          )}
+          onPress={() => navigation.navigate("UserScreenmain")}
         />
       </List.Section>
     </SafeArea>

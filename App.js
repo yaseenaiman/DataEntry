@@ -1,51 +1,64 @@
+import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-const Stack = createStackNavigator();
-import AddUserScreen from "./src/AddUserScreen";
-import FetchData from "./src/FetchData";
-import UserScreen from "./src/UserScreen";
-import UserDetailScreen from "./src/UserDetailScreen";
-function MyStack() {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: "#621FF7",
-        },
-        headerTintColor: "#fff",
-        headerTitleStyle: {
-          fontWeight: "bold",
-        },
-      }}
-    >
-      <Stack.Screen
-        name="اضافة المطاعم"
-        component={AddUserScreen}
-        options={{ title: "اضافة مطعم جديد" }}
-      />
-      <Stack.Screen
-        name="Fetch"
-        component={FetchData}
-        options={{ title: "قائمه المطاعم" }}
-      />
-      <Stack.Screen
-        name="UserDetailScreen"
-        component={UserDetailScreen}
-        options={{ title: "User Detail" }}
-      />
-      <Stack.Screen
-        name="UserScreen"
-        component={UserScreen}
-        options={{ title: "Users List" }}
-      />
-    </Stack.Navigator>
-  );
+import { ThemeProvider } from "styled-components/native";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
+import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
+
+import {
+  useFonts as useChanga,
+  Changa_500Medium,
+} from "@expo-google-fonts/changa";
+import {
+  useFonts as useChangaB,
+  Changa_700Bold,
+} from "@expo-google-fonts/changa";
+
+import { theme } from "./src/infrastructure/theme";
+import { Navigation } from "./src/infrastructure/navigation";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBw57HB-LOOYY4GfM8GnzPEKS6LeoscOn0",
+  authDomain: "foody-b06dc.firebaseapp.com",
+  databaseURL:
+    "https://foody-b06dc-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "foody-b06dc",
+  storageBucket: "foody-b06dc.appspot.com",
+  messagingSenderId: "14316139209",
+  appId: "1:14316139209:web:e70aae71499e454f941318",
+};
+
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+const db = firebaseApp.firestore();
+const auth = firebase.auth();
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
 }
+
+export { auth, db };
+
 export default function App() {
+  const [changaLoaded] = useChanga({
+    Changa_500Medium,
+  });
+
+  const [changaLoadedB] = useChangaB({
+    Changa_700Bold,
+  });
+
+  if (!changaLoaded || !changaLoadedB) {
+    return null;
+  }
+
   return (
-    <NavigationContainer>
-      <MyStack />
-    </NavigationContainer>
+    <>
+      <ThemeProvider theme={theme}>
+        <AuthenticationContextProvider>
+          <Navigation />
+        </AuthenticationContextProvider>
+      </ThemeProvider>
+      <ExpoStatusBar style="auto" />
+    </>
   );
 }

@@ -5,22 +5,6 @@ import { ListItem } from "react-native-elements";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
-const firebaseConfig = {
-  apiKey: "AIzaSyBw57HB-LOOYY4GfM8GnzPEKS6LeoscOn0",
-  authDomain: "foody-b06dc.firebaseapp.com",
-  projectId: "foody-b06dc",
-  storageBucket: "foody-b06dc.appspot.com",
-  messagingSenderId: "14316139209",
-  appId: "1:14316139209:web:93a007783f4b6923941318",
-};
-const firebaseApp = firebase.initializeApp(firebaseConfig);
-const db = firebaseApp.firestore();
-const auth = firebase.auth();
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-}
-
-export { auth, db };
 
 class UserScreen extends Component {
   constructor() {

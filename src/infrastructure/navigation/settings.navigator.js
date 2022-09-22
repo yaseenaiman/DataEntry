@@ -1,7 +1,7 @@
 import React from "react";
 import { SettingsScreen } from "../../features/settings/screens/settings.screen";
 import { FavouritesScreen } from "../../features/settings/screens/favourites.screen";
-
+import { UserScreenmainScreen } from "../../features/settings/screens/UserScreenmain.screen";
 import {
   createStackNavigator,
   CardStyleInterpolators,
@@ -25,6 +25,12 @@ export const SettingsNavigator = ({ route, navigation }) => {
         options={{ headerShown: false }}
         name="Favourites"
         component={FavouritesScreen}
+      />
+
+      <SettingsStack.Screen
+        options={{ headerShown: false }}
+        name="UserScreenmain"
+        component={UserScreenmainScreen}
       />
     </SettingsStack.Navigator>
   );

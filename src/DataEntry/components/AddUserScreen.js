@@ -1,35 +1,20 @@
 // screens/AddUserScreen.js
 import React, { Component } from "react";
-import {
-  Button,
-  StyleSheet,
-  TextInput,
-  ScrollView,
-  ActivityIndicator,
-  View,
-} from "react-native";
+import { StyleSheet, ActivityIndicator, View } from "react-native";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
-const firebaseConfig = {
-  apiKey: "AIzaSyBw57HB-LOOYY4GfM8GnzPEKS6LeoscOn0",
-  authDomain: "foody-b06dc.firebaseapp.com",
-  projectId: "foody-b06dc",
-  storageBucket: "foody-b06dc.appspot.com",
-  messagingSenderId: "14316139209",
-  appId: "1:14316139209:web:93a007783f4b6923941318",
-};
-
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-}
-
+import { Text } from "../../components/typography/text.components";
+import { colors } from "../../infrastructure/theme/colors";
+import { RestButton, RestInput, EntryRestList } from "../styles/addrest.styles";
+import { SafeArea } from "../../components/utility/safe-area.component";
 class AddUserScreen extends Component {
   constructor() {
     super();
     this.dbRef = firebase.firestore().collection("baghdad");
     this.state = {
       name: "",
+      email: "",
       isLoading: false,
     };
   }
@@ -40,7 +25,7 @@ class AddUserScreen extends Component {
   };
   storeUser() {
     if (this.state.name === "") {
-      alert("Fill at least your name!");
+      alert("قم بأدخال اسم على الاقل");
     } else {
       this.setState({
         isLoading: true,
@@ -48,11 +33,12 @@ class AddUserScreen extends Component {
       this.dbRef
         .add({
           name: this.state.name,
+          email: this.state.email,
         })
         .then((res) => {
           this.setState({
             name: "",
-
+            email: "",
             isLoading: false,
           });
           this.props.navigation.navigate("UserScreen");
@@ -74,38 +60,34 @@ class AddUserScreen extends Component {
       );
     }
     return (
-      <ScrollView style={styles.container}>
-        <View style={styles.inputGroup}>
-          <TextInput
-            placeholder={"Name"}
+      <SafeArea>
+        <EntryRestList>
+          <RestInput
+            placeholder={"اسم المطعم"}
+            placeholderTextColor={colors.text.primary}
             value={this.state.name}
+            textContentType="string"
+            autoCapitalize="none"
             onChangeText={(val) => this.inputValueUpdate(val, "name")}
           />
-        </View>
-
-        <View style={styles.button}>
-          <Button
-            title="ادخل معلومات مطعم جديد"
-            onPress={() => this.storeUser()}
-            color="#19AC52"
+          <RestInput
+            placeholder={"البريد الالكتروني"}
+            placeholderTextColor={colors.text.primary}
+            value={this.state.email}
+            textContentType="emailAddress"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            onChangeText={(val) => this.inputValueUpdate(val, "email")}
           />
-        </View>
-      </ScrollView>
+          <RestButton mode="contained" onPress={() => this.storeUser()}>
+            <Text variant="textButton">اضف معلومات المطعم</Text>
+          </RestButton>
+        </EntryRestList>
+      </SafeArea>
     );
   }
 }
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 35,
-  },
-  inputGroup: {
-    flex: 1,
-    padding: 0,
-    marginBottom: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: "#cccccc",
-  },
   preloader: {
     left: 0,
     right: 0,
