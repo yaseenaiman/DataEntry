@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react";
 import { ActivityIndicator, Colors } from "react-native-paper";
 import { colors } from "../../../infrastructure/theme/colors";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
 
 import {
   AccountBackground,
