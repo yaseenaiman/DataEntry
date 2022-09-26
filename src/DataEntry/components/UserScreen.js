@@ -1,6 +1,7 @@
 // screens/UserScreen.js
 import React, { Component } from "react";
-import { StyleSheet, ScrollView, ActivityIndicator, View } from "react-native";
+import { StyleSheet, ScrollView, View } from "react-native";
+import { ActivityIndicator, Colors } from "react-native-paper";
 import { ListItem } from "react-native-elements";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
@@ -40,7 +41,7 @@ class UserScreen extends Component {
     if (this.state.isLoading) {
       return (
         <View style={styles.preloader}>
-          <ActivityIndicator size="large" color="#9E9E9E" />
+          <ActivityIndicator size={50} animating={true} color={Colors.blue300} />
         </View>
       );
     }

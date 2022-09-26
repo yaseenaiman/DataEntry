@@ -4,62 +4,45 @@ import { colors } from "../../infrastructure/theme/colors";
 import { Text } from "../../components/typography/text.components";
 import { TextInput } from "react-native";
 import { ScrollView } from "react-native";
-export const AccountBackground = styled.ImageBackground.attrs({
+
+export const DataEntryBack = styled.ImageBackground.attrs({
   source: require("../../../assets/home_bg.jpg"),
 })`
   flex: 1;
   align-items: center;
   justify-content: center;
 `;
-
-export const AccountCover = styled.View`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.3);
-`;
-export const AccountContainer = styled.View`
-  background-color: rgba(255, 255, 255, 0.7);
-  padding: ${(props) => props.theme.space[4]};
-  margin-top: ${(props) => props.theme.space[2]};
-`;
-
 export const RestButton = styled(Button).attrs({
   color: colors.brand.primary,
 })`
-  padding: ${(props) => props.theme.space[2]};
+  padding: ${(props) => props.theme.space[0]};
 `;
 
 export const RestInput = styled(TextInput)`
-  width: 300px;
   text-align: right;
   font-family: ${(props) => props.theme.fonts.body};
   font-weight: ${(props) => props.theme.fontWeights.bold};
   background-color: ${(props) => props.theme.colors.bg.secondary};
-  padding: ${(props) => props.theme.space[2]};
+  padding: ${(props) => props.theme.space[3]};
+  border: ${(props) => props.theme.colors.ui.quaternary};
 `;
 
-export const Title = styled(Text)`
-  font-size: 30px;
+export const TitleEntry = styled(Text)`
+  font-size: 24px;
+  text-align: center;
+  padding: ${(props) => props.theme.space[4]};
 `;
-export const ErrorContainer = styled.View`
-  max-width: 300px;
-  align-items: center;
-  align-self: center;
-  margin-top: ${(props) => props.theme.space[2]};
-  margin-bottom: ${(props) => props.theme.space[2]};
-`;
-export const AnimationWrapper = styled.View`
-  width: 100%;
-  height: 40%;
-  position: absolute;
-  top: 30px;
-  padding: ${(props) => props.theme.space[2]};
-`;
+
 export const EntryRestList = styled(ScrollView)`
   text-align: right;
   font-family: ${(props) => props.theme.fonts.body};
   font-weight: ${(props) => props.theme.fontWeights.bold};
-  background-color: ${(props) => props.theme.colors.bg.secondary};
-  padding: ${(props) => props.theme.space[2]};
+  background-color: ${(props) => props.theme.colors.bg.primary};
+  padding: ${(props) => props.theme.space[5]};
+`;
+
+export const EntryContainer = styled.View`
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: ${(props) => props.theme.space[3]};
+  margin-top: ${(props) => props.theme.space[3]};
 `;
