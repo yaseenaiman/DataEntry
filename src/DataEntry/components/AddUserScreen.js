@@ -70,64 +70,62 @@ class AddUserScreen extends Component {
     if (this.state.isLoading) {
       return (
         <View style={styles.preloader}>
-          <ActivityIndicator size={50} color={Colors.blue300} animating={true} />
+          <ActivityIndicator
+            size={50}
+            color={Colors.blue300}
+            animating={true}
+          />
         </View>
       );
     }
     return (
       <DataEntryBack>
+        <SafeArea>
+          <EntryRestList>
+            <TitleEntry>معلومات المطعم</TitleEntry>
+            <RestInput
+              placeholder={"اسم المطعم"}
+              placeholderTextColor={colors.text.primary}
+              value={this.state.name}
+              textContentType="string"
+              autoCapitalize="none"
+              onChangeText={(val) => this.inputValueUpdate(val, "name")}
+            />
+            <RestInput
+              placeholder={"البريد الالكتروني"}
+              placeholderTextColor={colors.text.primary}
+              value={this.state.email}
+              textContentType="emailAddress"
+              keyboardType="email-address"
+              autoCapitalize="none"
+              onChangeText={(val) => this.inputValueUpdate(val, "email")}
+            />
 
-      <SafeArea>
-        <EntryRestList>
+            <CheckBox
+              checked={this.state.business_status}
+              onPress={() =>
+                this.setState({ checked: !this.state.business_status })
+              }
+            />
+            <RestInput
+              placeholder={"الموقع"}
+              placeholderTextColor={colors.text.primary}
+              value={this.state.vicinity}
+              textContentType="string"
+              autoCapitalize="none"
+              onChangeText={(val) => this.inputValueUpdate(val, "vicinity")}
+            />
 
-          <TitleEntry>معلومات المطعم
-
-</TitleEntry>
-                 <RestInput
-            placeholder={"اسم المطعم"}
-            placeholderTextColor={colors.text.primary}
-            value={this.state.name}
-            textContentType="string"
-            autoCapitalize="none"
-            onChangeText={(val) => this.inputValueUpdate(val, "name")}
-          />
-          <RestInput
-            placeholder={"البريد الالكتروني"}
-            placeholderTextColor={colors.text.primary}
-            value={this.state.email}
-            textContentType="emailAddress"
-            keyboardType="email-address"
-            autoCapitalize="none"
-            onChangeText={(val) => this.inputValueUpdate(val, "email")}
-          />
-
-<CheckBox
- 
-  checked={this.state.business_status}
-  onPress={() => this.setState({checked: !this.state.business_status})}
-/>
-           <RestInput
-            placeholder={"الموقع"}
-            placeholderTextColor={colors.text.primary}
-            value={this.state.vicinity}
-            textContentType="string"
-            autoCapitalize="none"
-            onChangeText={(val) => this.inputValueUpdate(val, "vicinity")}
-          />
-
-          <Spacer size="large">
-            <RestButton mode="contained" onPress={() => this.storeUser()}>
-              <Text variant="textButton">ارسال</Text>
-            </RestButton>
-          </Spacer>
-
-        </EntryRestList>
-      </SafeArea>
+            <Spacer size="large">
+              <RestButton mode="contained" onPress={() => this.storeUser()}>
+                <Text variant="textButton">ارسال</Text>
+              </RestButton>
+            </Spacer>
+          </EntryRestList>
+        </SafeArea>
       </DataEntryBack>
-
-      );
+    );
   }
-  
 }
 const styles = StyleSheet.create({
   preloader: {

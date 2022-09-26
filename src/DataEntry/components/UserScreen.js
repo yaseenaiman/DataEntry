@@ -41,7 +41,11 @@ class UserScreen extends Component {
     if (this.state.isLoading) {
       return (
         <View style={styles.preloader}>
-          <ActivityIndicator size={50} animating={true} color={Colors.blue300} />
+          <ActivityIndicator
+            size={50}
+            animating={true}
+            color={Colors.blue300}
+          />
         </View>
       );
     }
